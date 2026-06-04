@@ -87,12 +87,8 @@ def mostra_pannello_commesse(chiave_univoca):
         if c2.button("📁/🔓" if row['stato']=="Attiva" else "Attiva", key=f"st_{chiave_univoca}_{row['id']}"):
             nuovo_st = "Archiviata" if row['stato'] == "Attiva" else "Attiva"
             cursor.execute("UPDATE commesse SET stato = ? WHERE id = ?", (nuovo_st, row['id'])); conn.commit(); st.rerun()
-            # Assicurati che queste righe siano spostate verso destra (indentate)
-        if c3.button("🗑️ Elimina", key=f"del_{chiave_univoca}_{c_id}"):
-            ore_collegate = cursor.execute("SELECT COUNT(*) FROM ore_lavoro WHERE commessa_id = ?", (c_id,)).fetchone()[0]
-            if ore_collegate > 0:
-                st.error(f"❌ Impossibile eliminare: ha {ore_collegate} ore collegate. Archiviala!")
-            else:
-                cursor.execute("DELETE FROM commesse WHERE id = ?", (c_id,))
-                conn.commit()
-                st.rerun()
+           if c3.button("🗑️ Elimina", key=f"del_{chiave_univoca}_{c_id}"):
+            # TUTTO questo blocco deve essere spostato a destra (indentato)
+            cursor.execute("DELETE FROM commesse WHERE id = ?", (c_id,))
+            conn.commit()
+            st.rerun()
