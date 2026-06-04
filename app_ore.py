@@ -87,4 +87,4 @@ def mostra_pannello_commesse(chiave_univoca):
         if c2.button("📁/🔓" if row['stato']=="Attiva" else "Attiva", key=f"st_{chiave_univoca}_{row['id']}"):
             nuovo_st = "Archiviata" if row['stato'] == "Attiva" else "Attiva"
             cursor.execute("UPDATE commesse SET stato = ? WHERE id = ?", (nuovo_st, row['id'])); conn.commit(); st.rerun()
-        if c3.button("🗑️", key=f"del_{chiave
+    if c3.button("🗑️ Elimina", key=f"del_{chiave_univoca}_{c_id}"):
